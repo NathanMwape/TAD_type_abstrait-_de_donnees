@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+ 
+#define size 5
+
+struct pile
+{
+    int tab[size];
+    int top;
+};
+typedef struct pile PILE;
+PILE p;
+
+void push(int item) {
+	if (p.top >= size - 1)
+		return;
+	p.top++;
+	p.tab[p.top] = item;
+}
+
+int pop() {
+	if (p.top == -1)
+		return 1;
+   int item;
+   item = p.tab[p.top];
+   p.top--;
+   return item;
+}
+
+void afficher() {
+   int i;
+   if (p.top == -1)
+      printf("\nLa pile est vide!");
+   else {
+      for (i = p.top; i >= 0; i--)
+         printf("\n%d", p.tab[i]);
+   }
+}
+
+int main() {
+   int item, choice;
+   int option = 1;
+   p.top = -1;
+ 
+   printf("\n\tImplémentation d'une pile");
+   while (option) {
+      printf("\nMenu principal");
+      printf("\n1.Empiler \n2.Dépiler \n3.Afficher \n4.exit");
+      printf("\nEntrez votre choix: ");
+      scanf("%d", &choice);
+      switch (choice) {
+      case 1:
+         printf("\nEnter L'élément à empiler: ");
+         scanf("%d", &item);
+         push(item);
+         break;
+      case 2:
+         item = pop();
+         printf("\nL'élément dépilé est %d", item);
+         break;
+      case 3:
+         afficher();
+         break;
+      case 4:
+         exit(0);
+      }
+      printf("\nVoulez-vous continuer (Tapez 0(Non) ou 1(Oui))? : ");
+      scanf("%d", &option);
+   }
+   return 0;
+}
